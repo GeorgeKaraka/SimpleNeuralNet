@@ -49,7 +49,7 @@ def error(Y, T, w, lambda_reg):
 
 
 class NeuralNetwork:
-    def __init__(self, x, t, hidden_dim, output_dim, lr, epochs, lambda_reg=0.01, mini_batch_size=200):
+    def __init__(self, x, t, hidden_dim, output_dim, lr, epochs, lambda_reg=0.01):
         '''
         The constructor of the NeuralNetwork class.
         :param x: The dataset with examples in every row. Columns indicate the features.
@@ -59,7 +59,6 @@ class NeuralNetwork:
         :param lr: The learning rate on which the model will learn.
         :param epochs: Number of epochs.
         :param lambda_reg: The lambda value for regularization. Small lambda will overfit and large lambda will underfit.
-        :param mini_batch_size: The mini batch size for stochastic gradient descent. Recommended values 100 or 200
         '''
         self.x = x
         self.M = hidden_dim
@@ -67,7 +66,6 @@ class NeuralNetwork:
         in_dim = x.shape[1]
         out_dim = output_dim
 
-        self.batch_size = mini_batch_size
         self.epochs = epochs
 
         # Initialize weights
@@ -305,17 +303,17 @@ if __name__ == '__main__':
     M = 200
     K = t_train.shape[1]
     lr = 0.5
-    mini_batch_size = 100
     # Small lambda_reg will overfit the dataset
     lambda_reg = 0.01
     # Define number of epochs to train the network
+    
     epochs = 80
 
     # import time
     # start = time.time()
 
     # Initialize the model
-    model = NeuralNetwork(x_train/x_max, np.array(t_train), M, K, lr, epochs, lambda_reg, mini_batch_size)
+    model = NeuralNetwork(x_train/x_max, np.array(t_train), M, K, lr, epochs, lambda_reg)
 
     # Boolean for if you want to perform gradient checking
     grad_checking = False
